@@ -1,0 +1,40 @@
+diff --git a/src/Runner.Worker/Handlers/ContainerActionHandler.cs b/src/Runner.Worker/Handlers/ContainerActionHandler.cs
+index 099495c..9bf611e 100644
+--- a/src/Runner.Worker/Handlers/ContainerActionHandler.cs
++++ b/src/Runner.Worker/Handlers/ContainerActionHandler.cs
+@@ -234,7 +234,14 @@ namespace GitHub.Runner.Worker.Handlers
+                 Environment["ACTIONS_ID_TOKEN_REQUEST_URL"] = generateIdTokenUrl;
+                 Environment["ACTIONS_ID_TOKEN_REQUEST_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
+             }
+-            if (systemConnection.Data.TryGetValue("ResultsServiceUrl", out var resultsUrl) && !string.IsNullOrEmpty(resultsUrl))
++            // A results URL set on the runner (e.g. a self-hosted actions/cache
++            // server) takes precedence over the one GitHub sends.
++            var resultsUrlOverride = System.Environment.GetEnvironmentVariable("ACTIONS_RESULTS_URL");
++            if (!string.IsNullOrEmpty(resultsUrlOverride))
++            {
++                Environment["ACTIONS_RESULTS_URL"] = resultsUrlOverride;
++            }
++            else if (systemConnection.Data.TryGetValue("ResultsServiceUrl", out var resultsUrl) && !string.IsNullOrEmpty(resultsUrl))
+             {
+                 Environment["ACTIONS_RESULTS_URL"] = resultsUrl;
+             }
+diff --git a/src/Runner.Worker/Handlers/NodeScriptActionHandler.cs b/src/Runner.Worker/Handlers/NodeScriptActionHandler.cs
+index 85ff327..fa8f309 100644
+--- a/src/Runner.Worker/Handlers/NodeScriptActionHandler.cs
++++ b/src/Runner.Worker/Handlers/NodeScriptActionHandler.cs
+@@ -68,7 +68,14 @@ namespace GitHub.Runner.Worker.Handlers
+                 Environment["ACTIONS_ID_TOKEN_REQUEST_URL"] = generateIdTokenUrl;
+                 Environment["ACTIONS_ID_TOKEN_REQUEST_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
+             }
+-            if (systemConnection.Data.TryGetValue("ResultsServiceUrl", out var resultsUrl) && !string.IsNullOrEmpty(resultsUrl))
++            // A results URL set on the runner (e.g. a self-hosted actions/cache
++            // server) takes precedence over the one GitHub sends.
++            var resultsUrlOverride = System.Environment.GetEnvironmentVariable("ACTIONS_RESULTS_URL");
++            if (!string.IsNullOrEmpty(resultsUrlOverride))
++            {
++                Environment["ACTIONS_RESULTS_URL"] = resultsUrlOverride;
++            }
++            else if (systemConnection.Data.TryGetValue("ResultsServiceUrl", out var resultsUrl) && !string.IsNullOrEmpty(resultsUrl))
+             {
+                 Environment["ACTIONS_RESULTS_URL"] = resultsUrl;
+             }
