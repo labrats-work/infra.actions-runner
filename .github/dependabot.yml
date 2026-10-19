@@ -1,0 +1,17 @@
+version: 2
+
+# The stock runner base is the version pin; GitHub stops sending jobs to
+# runners that fall too far behind the latest release, so keep it current.
+updates:
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: chore
