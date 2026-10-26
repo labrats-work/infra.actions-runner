@@ -7,7 +7,7 @@
 # fails if a patch no longer applies or NuGet reports a vulnerable package.
 FROM ghcr.io/actions/actions-runner:2.338.0 AS runner-stock
 
-FROM ubuntu:24.04 AS runner-build
+FROM ubuntu:26.04 AS runner-build
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates curl git libicu74 && \
