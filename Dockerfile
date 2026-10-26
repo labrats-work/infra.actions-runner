@@ -5,7 +5,7 @@
 # The build compiles exactly the upstream commit stamped into that image's
 # Runner.Sdk.dll, using the .NET SDK version from upstream's global.json, and
 # fails if a patch no longer applies or NuGet reports a vulnerable package.
-FROM ghcr.io/actions/actions-runner:2.338.0 AS runner-stock
+FROM ghcr.io/actions/actions-runner:2.338.1 AS runner-stock
 
 FROM ubuntu:24.04 AS runner-build
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
