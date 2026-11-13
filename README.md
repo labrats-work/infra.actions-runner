@@ -17,6 +17,7 @@ This image instead compiles the runner with a patch that makes a runner-level `A
 | Patch | What it does |
 |---|---|
 | `0001-results-url-override` | If the runner's environment sets `ACTIONS_RESULTS_URL`, both action handlers (node and container) pass that to the action instead of GitHub's results URL. |
+| `0002-aspnetcore-webutilities-8.0.34` | Pins `Microsoft.AspNetCore.WebUtilities` to 8.0.34 in Runner.Worker (CVE-2026-114149, GHSA-x33c-w48q-qrgc); `Microsoft.DevTunnels.Connections` 1.3.60 pulls 8.0.25, and upstream's own build fails its NuGet audit without it. |
 
 ## Quick Start
 
