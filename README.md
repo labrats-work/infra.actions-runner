@@ -17,7 +17,6 @@ This image instead compiles the runner with a patch that makes a runner-level `A
 | Patch | What it does |
 |---|---|
 | `0001-results-url-override` | If the runner's environment sets `ACTIONS_RESULTS_URL`, both action handlers (node and container) pass that to the action instead of GitHub's results URL. |
-| `0002-pkcs-asn1-10.0.13` | Bumps `System.Security.Cryptography.Pkcs` / `System.Formats.Asn1` to 10.0.13 (CVE-2026-70162, CVE-2026-84008); upstream's own build fails its NuGet audit without it. |
 
 ## Quick Start
 
